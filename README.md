@@ -13,6 +13,14 @@ A production-ready FastMCP (Model Context Protocol) server with modular architec
 
 This demo provides a minimal FastMCP server with **4 powerful tools** organized in a modular structure:
 
+### 📋 Files Included
+
+- **`claude_desktop_config.json`**: Ready-to-use Claude Desktop configuration
+- **`demo.py`**: Main FastMCP server
+- **`tools/`**: Modular tool implementations
+- **`tests/`**: Comprehensive test suite (36 tests)
+- **`requirements.txt`**: Production dependencies
+
 ## 🛠️ Tools Available
 
 | Tool | Description | Example |
@@ -340,6 +348,223 @@ pip install -r requirements-dev.txt
 pytest tests/ --cov=tools --cov-report=html
 ```
 
+## 🤖 Claude Desktop Integration & Testing
+
+### Setting up Claude Desktop
+
+1. **Install for Claude Desktop (Automatic)**:
+   ```bash
+   fastmcp install demo.py
+   ```
+   This automatically configures Claude Desktop to use your FastMCP server.
+
+2. **Manual Configuration (Alternative)**:
+   If you prefer manual setup, copy the provided `claude_desktop_config.json` to your Claude Desktop configuration directory:
+   
+   **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+   **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+   **Linux**: `~/.config/Claude/claude_desktop_config.json`
+
+### Claude Desktop Configuration File
+
+The `claude_desktop_config.json` file in this repository contains the MCP server configuration:
+
+```json
+{
+  "mcpServers": {
+    "fastmcp-demo": {
+      "command": "python",
+      "args": ["demo.py"],
+      "cwd": ".",
+      "env": {}
+    }
+  }
+}
+```
+
+### Testing with Claude Desktop
+
+Once configured, restart Claude Desktop and you can test all tools through natural conversation:
+
+#### **Mathematical Operations**
+```
+You: "Add 15 and 27"
+Claude: I'll add those numbers for you.
+[Uses add tool: 15 + 27 = 42]
+
+You: "Multiply 3.14 by 2.5"
+Claude: I'll multiply those numbers.
+[Uses multiply tool: 3.14 × 2.5 = 7.85]
+```
+
+#### **Advanced Calculator**
+```
+You: "What's the square root of 64?"
+Claude: I'll calculate that for you.
+[Uses calculate tool: sqrt(64) = 8.0]
+
+You: "Calculate sin(pi/2) + cos(0)"
+Claude: I'll evaluate this trigonometric expression.
+[Uses calculate tool: sin(π/2) + cos(0) = 2.0]
+
+You: "What's (5 + 3)² - log(e)?"
+Claude: I'll solve this step by step.
+[Uses calculate tool: (5 + 3)² - log(e) = 64 - 1 = 63]
+```
+
+#### **Text Processing**
+```
+You: "Greet Sarah"
+Claude: I'll create a greeting for Sarah.
+[Uses greet tool: "Hello, Sarah! Welcome to FastMCP."]
+
+You: "Say hello to the development team"
+Claude: I'll greet the development team.
+[Uses greet tool: "Hello, development team! Welcome to FastMCP."]
+```
+
+#### **Complex Mathematical Expressions**
+```
+You: "Calculate the area of a circle with radius 5"
+Claude: I'll calculate the area using A = πr².
+[Uses calculate tool: pi * 5**2 = 78.54]
+
+You: "What's the hypotenuse of a right triangle with sides 3 and 4?"
+Claude: I'll use the Pythagorean theorem.
+[Uses calculate tool: sqrt(3**2 + 4**2) = 5.0]
+
+You: "Find the maximum of 15, 8, 23, and 12"
+Claude: I'll find the maximum value.
+[Uses calculate tool: max(15, 8, 23, 12) = 23]
+```
+
+### Advanced Claude Testing Scenarios
+
+#### **Multi-Step Problem Solving**
+```
+You: "I have a rectangular garden that's 12 meters by 8 meters. If I want to put a fence around it, how much fencing do I need? Also, what's the area?"
+
+Claude: I'll help you calculate both the perimeter (for fencing) and the area.
+
+First, let me calculate the perimeter:
+[Uses calculate tool: 2 * (12 + 8) = 40]
+You'll need 40 meters of fencing.
+
+Now for the area:
+[Uses calculate tool: 12 * 8 = 96]
+The garden area is 96 square meters.
+```
+
+#### **Educational Math Problems**
+```
+You: "Explain and solve: What's 25% of 80?"
+
+Claude: I'll calculate 25% of 80, which means 0.25 × 80.
+[Uses calculate tool: 0.25 * 80 = 20.0]
+25% of 80 is 20.
+
+You: "If I invest $1000 at 5% annual interest, what's the simple interest after 3 years?"
+
+Claude: Simple interest formula is I = P × r × t, where P=principal, r=rate, t=time.
+[Uses calculate tool: 1000 * 0.05 * 3 = 150.0]
+The simple interest after 3 years would be $150.
+```
+
+#### **Scientific Calculations**
+```
+You: "What's the kinetic energy of a 2kg object moving at 10 m/s?"
+
+Claude: I'll use the kinetic energy formula KE = ½mv².
+[Uses calculate tool: 0.5 * 2 * 10**2 = 100.0]
+The kinetic energy is 100 joules.
+
+You: "Convert 100°F to Celsius"
+
+Claude: I'll use the formula C = (F - 32) × 5/9.
+[Uses calculate tool: (100 - 32) * 5/9 = 37.78]
+100°F equals approximately 37.78°C.
+```
+
+### Troubleshooting Claude Integration
+
+#### **Common Issues and Solutions**
+
+1. **Tools not appearing in Claude**:
+   - Ensure you've restarted Claude Desktop after configuration
+   - Check that the server starts without errors: `python demo.py`
+   - Verify the configuration file is in the correct location
+
+2. **"Module not found" errors**:
+   - Make sure you're in the correct directory
+   - Install dependencies: `pip install -r requirements.txt`
+   - Check Python path: `python --version`
+
+3. **Calculator returning errors**:
+   - Verify mathematical syntax (use `*` for multiplication, `**` for powers)
+   - Check that functions are supported (see Calculator Capabilities section)
+   - Use parentheses for complex expressions
+
+4. **Tools timing out**:
+   - Complex calculations may take a moment
+   - Try breaking complex problems into smaller steps
+   - Ensure your system has adequate resources
+
+#### **Verifying Tool Availability**
+
+Ask Claude directly about available tools:
+```
+You: "What tools do you have available from the FastMCP demo?"
+
+Claude: I have access to these FastMCP demo tools:
+- add: Add two integers
+- multiply: Multiply two numbers  
+- calculate: Advanced calculator with 25+ mathematical functions
+- greet: Create personalized greetings
+```
+
+#### **Testing Tool Functionality**
+
+You can systematically test each tool:
+```
+You: "Test each of your math tools with simple examples"
+
+Claude: I'll test each tool:
+
+Testing add:
+[Uses add tool: 5 + 3 = 8] ✅
+
+Testing multiply:
+[Uses multiply tool: 4.0 × 2.5 = 10.0] ✅
+
+Testing calculate:
+[Uses calculate tool: sqrt(25) = 5] ✅
+
+Testing greet:
+[Uses greet tool: "Hello, tester! Welcome to FastMCP."] ✅
+
+All tools are working correctly!
+```
+
+### Best Practices for Claude Testing
+
+1. **Start Simple**: Begin with basic operations before complex expressions
+2. **Be Specific**: Clear requests get better tool usage
+3. **Verify Results**: Ask Claude to explain its calculations
+4. **Explore Capabilities**: Try different mathematical functions and operations
+5. **Test Edge Cases**: Try complex expressions, large numbers, and special cases
+
+### Example Testing Checklist
+
+- [ ] Basic arithmetic (add, multiply)
+- [ ] Advanced calculator functions (sqrt, sin, cos, log)
+- [ ] Constants (pi, e)
+- [ ] Complex expressions with parentheses
+- [ ] Text processing (greet with different names)
+- [ ] Error handling (invalid expressions)
+- [ ] Multi-step problem solving
+- [ ] Scientific calculations
+- [ ] Educational math problems
+
 ## 🧪 Full Test Results
 
 Below is the complete output from the test suite, demonstrating the robustness and reliability of the FastMCP Demo server:
@@ -408,6 +633,117 @@ Execution Time: 1.624 seconds
 - Professional Test Structure: Well-organized test modules with clear naming
 
 The test suite demonstrates that all 4 tools (`add`, `multiply`, `calculate`, `greet`) are working correctly with robust error handling and security measures in place!
+```
+
+#### **Educational Math Problems**
+```
+You: "Explain and solve: What's 25% of 80?"
+
+Claude: I'll calculate 25% of 80, which means 0.25 × 80.
+[Uses calculate tool: 0.25 * 80 = 20.0]
+25% of 80 is 20.
+
+You: "If I invest $1000 at 5% annual interest, what's the simple interest after 3 years?"
+
+Claude: Simple interest formula is I = P × r × t, where P=principal, r=rate, t=time.
+[Uses calculate tool: 1000 * 0.05 * 3 = 150.0]
+The simple interest after 3 years would be $150.
+```
+
+#### **Scientific Calculations**
+```
+You: "What's the kinetic energy of a 2kg object moving at 10 m/s?"
+
+Claude: I'll use the kinetic energy formula KE = ½mv².
+[Uses calculate tool: 0.5 * 2 * 10**2 = 100.0]
+The kinetic energy is 100 joules.
+
+You: "Convert 100°F to Celsius"
+
+Claude: I'll use the formula C = (F - 32) × 5/9.
+[Uses calculate tool: (100 - 32) * 5/9 = 37.78]
+100°F equals approximately 37.78°C.
+```
+
+### Troubleshooting Claude Integration
+
+#### **Common Issues and Solutions**
+
+1. **Tools not appearing in Claude**:
+   - Ensure you've restarted Claude Desktop after configuration
+   - Check that the server starts without errors: `python demo.py`
+   - Verify the configuration file is in the correct location
+
+2. **"Module not found" errors**:
+   - Make sure you're in the correct directory
+   - Install dependencies: `pip install -r requirements.txt`
+   - Check Python path: `python --version`
+
+3. **Calculator returning errors**:
+   - Verify mathematical syntax (use `*` for multiplication, `**` for powers)
+   - Check that functions are supported (see Calculator Capabilities section)
+   - Use parentheses for complex expressions
+
+4. **Tools timing out**:
+   - Complex calculations may take a moment
+   - Try breaking complex problems into smaller steps
+   - Ensure your system has adequate resources
+
+#### **Verifying Tool Availability**
+
+Ask Claude directly about available tools:
+```
+You: "What tools do you have available from the FastMCP demo?"
+
+Claude: I have access to these FastMCP demo tools:
+- add: Add two integers
+- multiply: Multiply two numbers  
+- calculate: Advanced calculator with 25+ mathematical functions
+- greet: Create personalized greetings
+```
+
+#### **Testing Tool Functionality**
+
+You can systematically test each tool:
+```
+You: "Test each of your math tools with simple examples"
+
+Claude: I'll test each tool:
+
+Testing add:
+[Uses add tool: 5 + 3 = 8] ✅
+
+Testing multiply:
+[Uses multiply tool: 4.0 × 2.5 = 10.0] ✅
+
+Testing calculate:
+[Uses calculate tool: sqrt(25) = 5] ✅
+
+Testing greet:
+[Uses greet tool: "Hello, tester! Welcome to FastMCP."] ✅
+
+All tools are working correctly!
+```
+
+### Best Practices for Claude Testing
+
+1. **Start Simple**: Begin with basic operations before complex expressions
+2. **Be Specific**: Clear requests get better tool usage
+3. **Verify Results**: Ask Claude to explain its calculations
+4. **Explore Capabilities**: Try different mathematical functions and operations
+5. **Test Edge Cases**: Try complex expressions, large numbers, and special cases
+
+### Example Testing Checklist
+
+- [ ] Basic arithmetic (add, multiply)
+- [ ] Advanced calculator functions (sqrt, sin, cos, log)
+- [ ] Constants (pi, e)
+- [ ] Complex expressions with parentheses
+- [ ] Text processing (greet with different names)
+- [ ] Error handling (invalid expressions)
+- [ ] Multi-step problem solving
+- [ ] Scientific calculations
+- [ ] Educational math problems
 
 ## 🤝 Contributing
 
