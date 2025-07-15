@@ -73,13 +73,11 @@ fastmcp_demo/
 
 ## 🚀 Quick Start
 
-## 🚀 Quick Start
-
 ### 1. Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/fastmcp-demo.git
+git clone https://github.com/lsantos2000/fastmcp-demo.git
 cd fastmcp-demo
 
 # Install dependencies
