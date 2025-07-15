@@ -90,19 +90,19 @@ cd fastmcp-demo
 ```
 # Install dependencies
 ```bash
-pip install -r requirements.txt
-
 # (Optional) Create and Activate a Virtual Environment - It's recommended to use a virtual environment to isolate dependencies:
 
 # Create a virtual environment (Windows)
 python -m venv .venv
 
 # Activate the virtual environment (Windows)
-#.venv\Scripts\activate
+.venv\Scripts\activate
 
 # On macOS/Linux:
 python3 -m venv .venv
 source .venv/bin/activate
+
+pip install -r requirements.txt
 ```
 
 ### 2. Run the Server
@@ -122,7 +122,7 @@ fastmcp inspect demo.py
 fastmcp dev demo.py
 
 # Install for Claude Desktop
-fastmcp install demo.py
+fastmcp install claude-desktop demo.py
 ```
 
 ## Setup (Alternative Method)
@@ -138,7 +138,7 @@ fastmcp install demo.py
    ```
 4. In another terminal, install the MCP into your client (e.g., Claude Desktop):
    ```bash
-   fastmcp install demo.py
+   fastmcp install claude-desktop demo.py
    ```
 
 ## 📝 Usage Examples
@@ -167,7 +167,7 @@ calculate("max(5, 3, 8) + min(2, 7, 1)")  # → 9
 ```
 
 ### Claude Desktop Integration
-After installing with `fastmcp install demo.py`, you can ask Claude:
+After installing with `fastmcp install claude-desktop demo.py`, you can ask Claude:
 - "Add 15 and 27"
 - "What's the square root of 64?"
 - "Calculate sin(pi/2) + cos(0)"
@@ -209,7 +209,7 @@ This will start an interactive shell where you can call the tools directly.
 
 1. First, install the server:
    ```bash
-   fastmcp install demo.py
+   fastmcp install claude-desktop demo.py
    ```
 
 2. The server will be available in Claude Desktop. You can then ask Claude to:
@@ -277,7 +277,7 @@ To verify your server is working correctly:
 
 3. **Install for Claude Desktop**:
    ```bash
-   fastmcp install demo.py
+   fastmcp install claude-desktop demo.py
    ```
    After installation, you can use the tools directly in Claude Desktop conversations.
 
@@ -285,6 +285,9 @@ To verify your server is working correctly:
 
 ### Common Issues
 - **"Module not found" error**: Make sure you've installed dependencies with `pip install -r requirements.txt`
+- **Virtual environment permission errors**: If you get permission denied errors when creating `.venv`, try:
+  - Remove the problematic directory: `Remove-Item -Path .venv -Recurse -Force` (Windows) or `rm -rf .venv` (Mac/Linux)
+  - Use a different name: `python -m venv venv_fastmcp` then `venv_fastmcp\Scripts\activate` (Windows)
 - **Calculator errors**: The calculator uses safe evaluation and will return error messages for invalid expressions
 - **Port conflicts**: If the server won't start, try killing any existing Python processes
 
@@ -367,7 +370,7 @@ pytest tests/ --cov=tools --cov-report=html
 
 1. **Install for Claude Desktop (Automatic)**:
    ```bash
-   fastmcp install demo.py
+   fastmcp install claude-desktop demo.py
    ```
    This automatically configures Claude Desktop to use your FastMCP server.
 
