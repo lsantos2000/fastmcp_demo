@@ -203,7 +203,6 @@ fastmcp inspect demo.py
 
 # Start interactive development mode (browser-based GUI)
 fastmcp dev demo.py
-
 ```
 
 The `fastmcp dev` command opens an interactive browser-based interface where you can:
@@ -214,47 +213,6 @@ The `fastmcp dev` command opens an interactive browser-based interface where you
 
 This provides the most user-friendly way to test your FastMCP tools directly from the command line.
 
-### Alternative Method: HTTP Testing with curl
-
-You can also test the server by running it as an HTTP service and making direct HTTP requests:
-
-```bash
-# Start your server as HTTP service in one terminal
-fastmcp run demo.py
-# → Server listens on http://127.0.0.1:5000
-
-# In another terminal, test the tools with curl:
-
-# Test add(3,5):
-curl -X POST http://127.0.0.1:5000/tool/add \
-  -H "Content-Type: application/json" \
-  -d '{"a":3,"b":5}'
-# → {"result":8}
-
-# Test multiply(2.5,4):
-curl -X POST http://127.0.0.1:5000/tool/multiply \
-  -H "Content-Type: application/json" \
-  -d '{"a":2.5,"b":4}'
-# → {"result":10.0}
-
-# Test greet("Alice"):
-curl -X POST http://127.0.0.1:5000/tool/greet \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Alice"}'
-# → {"result":"Hello, Alice! Welcome to FastMCP."}
-
-# Test calculator expressions:
-curl -X POST http://127.0.0.1:5000/tool/calculate \
-  -H "Content-Type: application/json" \
-  -d '{"expression":"sqrt(64) + sin(pi/2)"}'
-# → {"result":9.0}
-```
-
-This HTTP testing method is useful for:
-- Integration testing with other applications
-- Automated testing scripts
-- API development and debugging
-- Performance testing with tools like Apache Bench or wrk
 #### Example: Running All Tests
 
 You can run the full test suite to verify all tools and server functionality:
