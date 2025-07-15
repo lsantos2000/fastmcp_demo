@@ -386,16 +386,10 @@ fastmcp inspect demo.py
 fastmcp dev demo.py
 ```
 
-### **Server Inspection**
-```bash
-# Inspect available tools and their schemas
-fastmcp inspect demo.py
-```
-
 ### **Client Integration**
 ```bash
 # Install server for Claude Desktop integration
-fastmcp install demo.py
+fastmcp install claude-desktop demo.py
 ```
 
 ## 🎯 Key Technical Achievements

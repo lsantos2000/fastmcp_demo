@@ -227,13 +227,6 @@ python tests/run_tests.py
 
 This will execute all unit and integration tests, showing a summary of results and code coverage.
 
-```bash
-# Interactive development mode (recommended for testing)
-fastmcp dev demo.py
-```
-
-This opens an interactive browser-based interface where you can test all tools with a user-friendly GUI.
-
 ### Method 2: Interactive Testing
 
 Start an interactive session with your MCP server:
@@ -242,7 +235,7 @@ Start an interactive session with your MCP server:
 fastmcp dev demo.py
 ```
 
-This will start an interactive shell where you can call the tools directly.
+This will start the MCP Inspector in your browser for interactive testing.
 
 ### Method 3: Integration with Claude Desktop
 
