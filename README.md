@@ -61,23 +61,31 @@ This demo provides a minimal FastMCP server with **4 powerful tools** organized 
 
 ```
 fastmcp_demo/
-├── demo.py              # Main server entry point
-├── tools/               # Tools package
-│   ├── __init__.py     # Package initialization
-│   ├── math_tools.py   # Mathematical operations
-│   └── text_tools.py   # Text processing tools
-├── tests/               # Comprehensive test suite (36 tests)
-│   ├── __init__.py     # Test package
-│   ├── test_math_tools.py      # Math tools tests
-│   ├── test_text_tools.py      # Text tools tests
-│   ├── test_integration.py     # Integration tests
-│   ├── run_tests.py    # Test runner script
-│   └── README.md       # Test documentation
-├── requirements.txt     # Production dependencies
-├── requirements-dev.txt # Development dependencies
-├── pyproject.toml      # Project configuration
-└── README.md           # This file
+├── demo.py                     # Main server entry point
+├── claude_desktop_config.json  # Claude Desktop configuration
+├── test_claude_integration.py  # Integration test script
+├── tools/                      # Tools package
+│   ├── __init__.py            # Package initialization
+│   ├── math_tools.py          # Mathematical operations
+│   └── text_tools.py          # Text processing tools
+├── tests/                      # Comprehensive test suite (36 tests)
+│   ├── __init__.py            # Test package
+│   ├── test_math_tools.py     # Math tools tests
+│   ├── test_text_tools.py     # Text tools tests
+│   ├── test_integration.py    # Integration tests
+│   ├── run_tests.py           # Test runner script
+│   └── README.md              # Test documentation
+├── docs/                       # Documentation
+│   ├── PROJECT_STRUCTURE.md   # Project organization guide
+│   └── images/                # Documentation images
+├── images/                     # Main project images
+├── requirements.txt            # Production dependencies
+├── requirements-dev.txt        # Development dependencies
+├── pyproject.toml             # Project configuration
+└── README.md                  # This file
 ```
+
+> 📚 **For detailed project organization and image guidelines, see [`docs/PROJECT_STRUCTURE.md`](docs/PROJECT_STRUCTURE.md)**
 
 ## 🚀 Quick Start
 
@@ -139,6 +147,16 @@ fastmcp install claude-desktop demo.py
 4. In another terminal, install the MCP into your client (e.g., Claude Desktop):
    ```bash
    fastmcp install claude-desktop demo.py
+
+
+💡 Next steps:
+1. Restart Claude Desktop
+2. Ask Claude: 'What tools do you have available?'
+3. Test with: 'Add 3 and 5' or 'Calculate sqrt(64)'
+
+   ![Claude prompt and response about tools](images/claude-1.png)
+
+   ![Claude prompt and response when asking to calculate (using the tool)](images/claude-2.png)
    ```
 
 ## 📝 Usage Examples
