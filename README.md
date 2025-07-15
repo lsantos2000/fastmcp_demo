@@ -87,9 +87,22 @@ fastmcp_demo/
 # Clone the repository
 git clone https://github.com/lsantos2000/fastmcp-demo.git
 cd fastmcp-demo
-
+```
 # Install dependencies
+```bash
 pip install -r requirements.txt
+
+# (Optional) Create and Activate a Virtual Environment - It's recommended to use a virtual environment to isolate dependencies:
+
+# Create a virtual environment (Windows)
+python -m venv .venv
+
+# Activate the virtual environment (Windows)
+#.venv\Scripts\activate
+
+# On macOS/Linux:
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 ### 2. Run the Server
