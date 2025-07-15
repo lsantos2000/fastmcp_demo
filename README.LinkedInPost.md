@@ -354,23 +354,11 @@ OK (skipped=1)
 # Inspect server capabilities
 fastmcp inspect demo.py
 
-# Interactive development mode
+# Interactive development mode (recommended)
 fastmcp dev demo.py
 
 # Install for Claude Desktop
 fastmcp install claude-desktop demo.py
-
-# Run as HTTP service for API testing
-fastmcp run demo.py
-
-# Test tools via HTTP with curl:
-curl -X POST http://127.0.0.1:5000/tool/add \
-  -H "Content-Type: application/json" \
-  -d '{"a":3,"b":5}'
-
-curl -X POST http://127.0.0.1:5000/tool/calculate \
-  -H "Content-Type: application/json" \
-  -d '{"expression":"sqrt(16) + sin(pi/2)"}'
 ```
 
 **Example usage in Claude Desktop**:
@@ -394,31 +382,14 @@ fastmcp inspect demo.py
 
 ### **Interactive Development**
 ```bash
-# Launch interactive development environment
+# Launch interactive development environment (recommended)
 fastmcp dev demo.py
 ```
 
-### **HTTP API Testing**
+### **Server Inspection**
 ```bash
-# Run server as HTTP service
-fastmcp run demo.py
-# → Server listens on http://127.0.0.1:5000
-
-# Test tools with curl in another terminal:
-curl -X POST http://127.0.0.1:5000/tool/add \
-  -H "Content-Type: application/json" \
-  -d '{"a":10,"b":20}'
-# → {"result":30}
-
-curl -X POST http://127.0.0.1:5000/tool/calculate \
-  -H "Content-Type: application/json" \
-  -d '{"expression":"sin(pi/2) + log(e)"}'
-# → {"result":2.0}
-
-curl -X POST http://127.0.0.1:5000/tool/greet \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Developer"}'
-# → {"result":"Hello, Developer! Welcome to FastMCP."}
+# Inspect available tools and their schemas
+fastmcp inspect demo.py
 ```
 
 ### **Client Integration**
