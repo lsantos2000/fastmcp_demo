@@ -198,20 +198,83 @@ After installing with `fastmcp install claude-desktop demo.py`, you can ask Clau
 You can test the MCP server directly using the FastMCP CLI:
 
 ```bash
-# Test the add function
-fastmcp call demo.py add --a 3 --b 5
+# Inspect available tools and server info
+fastmcp inspect demo.py
 
-# Test the multiply function  
-fastmcp call demo.py multiply --a 2.5 --b 4.0
+# Start interactive development mode (browser-based GUI)
+fastmcp dev demo.py
 
-# Test the greet function
-fastmcp call demo.py greet --name "Alice"
-
-# Test the calculator function
-fastmcp call demo.py calculate --expression "2 + 3 * 4"
-fastmcp call demo.py calculate --expression "sqrt(16) + sin(pi/2)"
-fastmcp call demo.py calculate --expression "(5 + 3) ** 2"
 ```
+
+The `fastmcp dev` command opens an interactive browser-based interface where you can:
+- View all available tools and their schemas
+- Test tools with custom parameters (e.g., add with a=3, b=5)
+- Run calculator expressions like "sqrt(64) + sin(pi/2)"
+- Get immediate feedback and validation
+
+This provides the most user-friendly way to test your FastMCP tools directly from the command line.
+
+### Alternative Method: HTTP Testing with curl
+
+You can also test the server by running it as an HTTP service and making direct HTTP requests:
+
+```bash
+# Start your server as HTTP service in one terminal
+fastmcp run demo.py
+# → Server listens on http://127.0.0.1:5000
+
+# In another terminal, test the tools with curl:
+
+# Test add(3,5):
+curl -X POST http://127.0.0.1:5000/tool/add \
+  -H "Content-Type: application/json" \
+  -d '{"a":3,"b":5}'
+# → {"result":8}
+
+# Test multiply(2.5,4):
+curl -X POST http://127.0.0.1:5000/tool/multiply \
+  -H "Content-Type: application/json" \
+  -d '{"a":2.5,"b":4}'
+# → {"result":10.0}
+
+# Test greet("Alice"):
+curl -X POST http://127.0.0.1:5000/tool/greet \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Alice"}'
+# → {"result":"Hello, Alice! Welcome to FastMCP."}
+
+# Test calculator expressions:
+curl -X POST http://127.0.0.1:5000/tool/calculate \
+  -H "Content-Type: application/json" \
+  -d '{"expression":"sqrt(64) + sin(pi/2)"}'
+# → {"result":9.0}
+```
+
+This HTTP testing method is useful for:
+- Integration testing with other applications
+- Automated testing scripts
+- API development and debugging
+- Performance testing with tools like Apache Bench or wrk
+#### Example: Running All Tests
+
+You can run the full test suite to verify all tools and server functionality:
+
+```bash
+# Run all tests with pytest
+pytest tests/
+
+# Or use the custom test runner script
+python tests/run_tests.py
+```
+
+This will execute all unit and integration tests, showing a summary of results and code coverage.
+
+```bash
+# Interactive development mode (recommended for testing)
+fastmcp dev demo.py
+```
+
+This opens an interactive browser-based interface where you can test all tools with a user-friendly GUI.
 
 ### Method 2: Interactive Testing
 

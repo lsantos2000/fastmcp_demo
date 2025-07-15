@@ -358,15 +358,19 @@ fastmcp inspect demo.py
 fastmcp dev demo.py
 
 # Install for Claude Desktop
-fastmcp install demo.py
+fastmcp install claude-desktop demo.py
 
-# Direct tool testing with fastmcp call
-fastmcp call demo.py add --a 3 --b 5
-fastmcp call demo.py multiply --a 2.5 --b 4.0
-fastmcp call demo.py greet --name "Alice"
-fastmcp call demo.py calculate --expression "2 + 3 * 4"
-fastmcp call demo.py calculate --expression "sqrt(16) + sin(pi/2)"
-fastmcp call demo.py calculate --expression "(5 + 3) ** 2"
+# Run as HTTP service for API testing
+fastmcp run demo.py
+
+# Test tools via HTTP with curl:
+curl -X POST http://127.0.0.1:5000/tool/add \
+  -H "Content-Type: application/json" \
+  -d '{"a":3,"b":5}'
+
+curl -X POST http://127.0.0.1:5000/tool/calculate \
+  -H "Content-Type: application/json" \
+  -d '{"expression":"sqrt(16) + sin(pi/2)"}'
 ```
 
 **Example usage in Claude Desktop**:
@@ -394,12 +398,27 @@ fastmcp inspect demo.py
 fastmcp dev demo.py
 ```
 
-### **Direct Tool Testing**
+### **HTTP API Testing**
 ```bash
-# Test individual tools with specific parameters
-fastmcp call demo.py add --a 10 --b 20
-fastmcp call demo.py calculate --expression "sin(pi/2) + log(e)"
-fastmcp call demo.py greet --name "Developer"
+# Run server as HTTP service
+fastmcp run demo.py
+# → Server listens on http://127.0.0.1:5000
+
+# Test tools with curl in another terminal:
+curl -X POST http://127.0.0.1:5000/tool/add \
+  -H "Content-Type: application/json" \
+  -d '{"a":10,"b":20}'
+# → {"result":30}
+
+curl -X POST http://127.0.0.1:5000/tool/calculate \
+  -H "Content-Type: application/json" \
+  -d '{"expression":"sin(pi/2) + log(e)"}'
+# → {"result":2.0}
+
+curl -X POST http://127.0.0.1:5000/tool/greet \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Developer"}'
+# → {"result":"Hello, Developer! Welcome to FastMCP."}
 ```
 
 ### **Client Integration**
