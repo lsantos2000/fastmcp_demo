@@ -49,21 +49,48 @@ def greet(name: str) -> str:
 
 ```
 fastmcp_demo/
-├── demo.py              # Main server entry point
-├── tools/               # Tools package
-│   ├── __init__.py     # Package initialization
-│   ├── math_tools.py   # Mathematical operations
-│   └── text_tools.py   # Text processing tools
-├── tests/               # Comprehensive test suite (36 tests)
-│   ├── __init__.py     # Test package
-│   ├── test_math_tools.py      # Math tools tests
-│   ├── test_text_tools.py      # Text tools tests
-│   ├── test_integration.py     # Integration tests
-│   ├── run_tests.py    # Test runner script
-│   └── README.md       # Test documentation
-├── requirements.txt     # Production dependencies
-├── requirements-dev.txt # Development dependencies
-└── pyproject.toml      # Project configuration
+├── demo.py                     # Main server entry point
+├── LICENSE                     # MIT License
+├── README.md                   # Main project documentation
+├── README.LinkedInPost.md      # This detailed guide
+├── pyproject.toml             # Project configuration
+├── requirements.txt           # Production dependencies
+├── requirements-dev.txt       # Development dependencies
+├── claude_desktop_config.json # Claude Desktop configuration
+├── server-info.json          # Generated server inspection report
+├── test_claude_integration.py # Integration test script
+├── verify_setup.py           # Setup verification script
+├── publish.bat               # Windows publishing script
+├── publish.sh                # Unix publishing script
+├── .gitignore                # Git ignore patterns
+├──
+├── tools/                    # Tools package
+│   ├── __init__.py          # Package initialization
+│   ├── math_tools.py        # Mathematical operations
+│   └── text_tools.py        # Text processing tools
+├──
+├── tests/                   # Comprehensive test suite (36 tests)
+│   ├── __init__.py         # Test package initialization
+│   ├── README.md           # Test documentation
+│   ├── run_tests.py        # Test runner script
+│   ├── test_math_tools.py  # Math tools tests
+│   ├── test_text_tools.py  # Text tools tests
+│   └── test_integration.py # Integration tests
+├──
+├── docs/                   # Project documentation
+│   └── PROJECT_STRUCTURE.md # Detailed project structure guide
+├──
+├── images/                 # Project screenshots and assets
+│   ├── README.md          # Image documentation
+│   ├── claude-1.png       # Claude tools availability
+│   └── claude-2.png       # Claude calculator demo
+├──
+├── .github/               # GitHub configuration
+│   └── workflows/         # CI/CD workflows
+│       └── ci.yml        # Continuous integration setup
+├──
+├── __pycache__/          # Python cache (auto-generated)
+└── .venv/                # Virtual environment (created locally)
 ```
 
 ### Step 2: Creating Modular Tool Files
